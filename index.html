@@ -108,27 +108,7 @@
             </h2>
           </div>
 
-          <div class="readiness-ring-wrap">
-            <div class="readiness-ring" id="readinessRing">
-              <svg width="148" height="148" viewBox="0 0 148 148">
-                <defs>
-                  <linearGradient id="readinessGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="var(--accent-markets)" />
-                    <stop offset="100%" stop-color="var(--accent-calendar)" />
-                  </linearGradient>
-                </defs>
-                <circle class="ring-track" cx="74" cy="74" r="64"></circle>
-                <circle class="ring-value" cx="74" cy="74" r="64" stroke="url(#readinessGradient)" stroke-dasharray="0 402"></circle>
-              </svg>
-              <div class="readiness-center">
-                <span class="readiness-number" id="readinessNumber">--</span>
-                <span class="readiness-sub">Readiness</span>
-                <span class="readiness-caption" id="readinessCaption">Loading</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="metric-list" id="ouraMetricGrid"></div>
+          <div class="oura-rings-grid" id="ouraRingsGrid"></div>
 
           <div class="card-footer-row">
             <button class="card-footer-link accent-health" data-card-link="oura">

@@ -241,8 +241,7 @@ async function loadAll(sheetApi, isManualRefresh) {
   });
 
   // Oura card
-  OuraMod.renderReadinessRing($("#readinessRing"), $("#readinessNumber"), $("#readinessCaption"), ouraSummary);
-  OuraMod.renderMetricGrid($("#ouraMetricGrid"), ouraSummary);
+  OuraMod.renderOuraRings($("#ouraRingsGrid"), ouraSummary);
   const ouraUpdatedEl = $("#ouraUpdatedAt");
   if (ouraUpdatedEl) {
     ouraUpdatedEl.textContent = `Updated ${today.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;

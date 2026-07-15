@@ -91,6 +91,15 @@
     border-radius: 22px;
   }
 
+  .mini-ring {
+    width: 64px;
+    height: 64px;
+  }
+
+  .mini-ring-number {
+    font-size: 14px;
+  }
+
   .weather-columns {
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
