@@ -214,6 +214,7 @@ async function loadAll(sheetApi, isManualRefresh) {
   $("#marketsRefreshBtn")?.classList.add("is-spinning");
   $("#weatherRefreshBtn")?.classList.add("is-spinning");
   $("#ouraRefreshBtn")?.classList.add("is-spinning");
+  $("#todayRefreshBtn")?.classList.add("is-spinning");
 
   const today = new Date();
 
@@ -230,6 +231,14 @@ async function loadAll(sheetApi, isManualRefresh) {
   CalendarMod.renderNextEvent($("#nextEventRow"), calendarSummary, today);
   CalendarMod.renderReminders($("#remindersList"), calendarSummary);
   BirthdaysMod.renderBirthdayUpcomingRows($("#birthdaysTodayList"), birthdaysSummary);
+  const todayUpdatedEl = $("#todayUpdatedAt");
+  if (todayUpdatedEl) {
+    todayUpdatedEl.textContent = `Updated ${today.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
+  }
+  $("#todayRefreshBtn")?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    loadAll(sheetApi, true);
+  });
 
   // Oura card
   OuraMod.renderReadinessRing($("#readinessRing"), $("#readinessNumber"), $("#readinessCaption"), ouraSummary);
@@ -343,6 +352,7 @@ async function loadAll(sheetApi, isManualRefresh) {
   $("#marketsRefreshBtn")?.classList.remove("is-spinning");
   $("#weatherRefreshBtn")?.classList.remove("is-spinning");
   $("#ouraRefreshBtn")?.classList.remove("is-spinning");
+  $("#todayRefreshBtn")?.classList.remove("is-spinning");
   renderFooterClock();
 }
 
