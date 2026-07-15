@@ -6,12 +6,12 @@
 // module on each deploy, instead of silently serving whatever was last
 // cached (this is what caused the stale-JS layout bugs in Safari — bump
 // this any time app.js or any imported module changes).
-import * as CalendarMod from "./calendar.js?v=15";
-import * as OuraMod from "./oura.js?v=15";
-import * as WeatherMod from "./weather.js?v=15";
-import * as MarketsMod from "./markets.js?v=15";
-import * as TravelMod from "./travel.js?v=15";
-import * as BirthdaysMod from "./birthdays.js?v=15";
+import * as CalendarMod from "./calendar.js?v=16";
+import * as OuraMod from "./oura.js?v=16";
+import * as WeatherMod from "./weather.js?v=16";
+import * as MarketsMod from "./markets.js?v=16";
+import * as TravelMod from "./travel.js?v=16";
+import * as BirthdaysMod from "./birthdays.js?v=16";
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -281,9 +281,13 @@ async function loadAll(sheetApi, isManualRefresh) {
     loadAll(sheetApi, true);
   });
 
-  // Hero weather (header)
+  // Hero weather (header) — show home city immediately, then upgrade to
+  // wherever you actually are if the browser grants location access.
   const camarillo = weather.find((w) => w.id === "camarillo") || weather[0];
   WeatherMod.renderHeroWeather($("#heroWeather"), camarillo);
+  WeatherMod.getCurrentLocationWeather().then((here) => {
+    if (here) WeatherMod.renderHeroWeather($("#heroWeather"), here);
+  });
 
   // Weather card
   WeatherMod.renderWeatherColumns($("#weatherColumns"), weather);

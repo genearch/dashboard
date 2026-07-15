@@ -69,6 +69,67 @@ async function fetchLocation(loc) {
   };
 }
 
+/* ---------------------------------------------------------------------- *
+ * Current-location weather (browser geolocation) — used for the header
+ * hero, which follows wherever you actually are instead of always
+ * showing home. Falls back silently (returns null) if geolocation is
+ * denied, unavailable, or slow, so the caller should keep showing the
+ * home-city weather as the default and swap in this result if/when it
+ * resolves.
+ * ---------------------------------------------------------------------- */
+
+async function fetchWeatherForCoords(lat, lon) {
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&temperature_unit=fahrenheit&timezone=auto&forecast_days=1`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("Weather fetch failed for current location");
+  const json = await res.json();
+  const todayDesc = describe(json.daily.weather_code[0]);
+  return {
+    current: Math.round(json.current.temperature_2m),
+    high: Math.round(json.daily.temperature_2m_max[0]),
+    low: Math.round(json.daily.temperature_2m_min[0]),
+    condition: todayDesc.label,
+    icon: todayDesc.icon,
+  };
+}
+
+async function reverseGeocode(lat, lon) {
+  const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
+  if (!res.ok) throw new Error("Reverse geocode failed");
+  const json = await res.json();
+  return json.city || json.locality || json.principalSubdivision || "Current location";
+}
+
+function getPosition() {
+  return new Promise((resolve) => {
+    if (!("geolocation" in navigator)) {
+      resolve(null);
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      (pos) => resolve(pos),
+      () => resolve(null), // denied / unavailable — caller falls back to home city
+      { timeout: 8000, maximumAge: 15 * 60 * 1000 }
+    );
+  });
+}
+
+export async function getCurrentLocationWeather() {
+  const position = await getPosition();
+  if (!position) return null;
+  const { latitude, longitude } = position.coords;
+  try {
+    const [name, weather] = await Promise.all([
+      reverseGeocode(latitude, longitude).catch(() => "Current location"),
+      fetchWeatherForCoords(latitude, longitude),
+    ]);
+    return { id: "current", name, ...weather };
+  } catch (err) {
+    console.warn("Current-location weather unavailable.", err);
+    return null;
+  }
+}
+
 let cache = null;
 
 export async function getWeatherSummary() {
