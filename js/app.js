@@ -2,12 +2,16 @@
    app.js — Dashboard v2 bootstrap
    ========================================================================== */
 
-import * as CalendarMod from "./calendar.js";
-import * as OuraMod from "./oura.js";
-import * as WeatherMod from "./weather.js";
-import * as MarketsMod from "./markets.js";
-import * as TravelMod from "./travel.js";
-import * as BirthdaysMod from "./birthdays.js";
+// Query-string version bump forces browsers to fetch a fresh copy of every
+// module on each deploy, instead of silently serving whatever was last
+// cached (this is what caused the stale-JS layout bugs in Safari — bump
+// this any time app.js or any imported module changes).
+import * as CalendarMod from "./calendar.js?v=13";
+import * as OuraMod from "./oura.js?v=13";
+import * as WeatherMod from "./weather.js?v=13";
+import * as MarketsMod from "./markets.js?v=13";
+import * as TravelMod from "./travel.js?v=13";
+import * as BirthdaysMod from "./birthdays.js?v=13";
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));

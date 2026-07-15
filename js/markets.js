@@ -7,7 +7,7 @@
    ========================================================================== */
 
 async function fetchMarkets() {
-  const res = await fetch("data/markets.json");
+  const res = await fetch(`data/markets.json?t=${Date.now()}`, { cache: "no-store" });
   return res.json();
 }
 

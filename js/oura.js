@@ -14,7 +14,7 @@
    ========================================================================== */
 
 async function fetchDays() {
-  const res = await fetch("data/oura.json");
+  const res = await fetch(`data/oura.json?t=${Date.now()}`, { cache: "no-store" });
   const json = await res.json();
   return json.days;
 }
@@ -220,6 +220,11 @@ export function renderOuraRings(container, summary) {
 }
 
 function buildRingItem({ svg, number, unit, unitColor, delta, label, numberSize }) {
+  // The delta lives OUTSIDE the ring (under the label) rather than crammed
+  // inside the circle with the number + unit — three lines of text inside
+  // an ~80px circle doesn't survive different browsers' font metrics
+  // (Safari renders wider/taller than Chrome and it spills onto the ring
+  // stroke). Only the number + unit live inside the ring itself.
   const item = document.createElement("div");
   item.className = "mini-ring-item";
   item.innerHTML = `
@@ -228,10 +233,10 @@ function buildRingItem({ svg, number, unit, unitColor, delta, label, numberSize 
       <div class="mini-ring-center">
         <span class="mini-ring-number"${numberSize ? ` style="font-size:${numberSize}"` : ""}>${number}</span>
         <span class="mini-ring-unit"${unitColor ? ` style="color:${unitColor}"` : ""}>${unit}</span>
-        <span class="mini-ring-delta" style="color:${delta.color}">${delta.text}</span>
       </div>
     </div>
     <div class="mini-ring-label">${label}</div>
+    <div class="mini-ring-delta" style="color:${delta.color}">${delta.text}</div>
   `;
   return item;
 }

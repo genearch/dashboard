@@ -12,13 +12,13 @@
    ========================================================================== */
 
 async function fetchEvents() {
-  const res = await fetch("data/calendar.json");
+  const res = await fetch(`data/calendar.json?t=${Date.now()}`, { cache: "no-store" });
   const json = await res.json();
   return json.events;
 }
 
 async function fetchReminders() {
-  const res = await fetch("data/reminders.json");
+  const res = await fetch(`data/reminders.json?t=${Date.now()}`, { cache: "no-store" });
   const json = await res.json();
   return json.reminders.filter((r) => !r.completed);
 }

@@ -18,7 +18,7 @@ const TYPE_ICON = {
 };
 
 async function fetchTrips() {
-  const res = await fetch("data/trips.json");
+  const res = await fetch(`data/trips.json?t=${Date.now()}`, { cache: "no-store" });
   const json = await res.json();
   return json.trips;
 }

@@ -11,7 +11,7 @@
 const CSV_URL = "data/birthdays.csv";
 
 async function readBirthdaysCsv() {
-  const res = await fetch(CSV_URL);
+  const res = await fetch(`${CSV_URL}?t=${Date.now()}`, { cache: "no-store" });
   const text = await res.text();
   return text
     .split("\n")
