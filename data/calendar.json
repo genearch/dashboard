@@ -1,0 +1,15 @@
+{
+  "_comment": "Seeded from a live pear_list_events call against the connected Outlook account on 2026-07-14. See js/calendar.js for the live-fetch integration point.",
+  "events": [
+    {
+      "id": "dealers-quick-sync",
+      "title": "Dealers - Quick Sync",
+      "start": "2026-07-14T17:30:00.000Z",
+      "end": "2026-07-14T17:45:00.000Z",
+      "calendar": "Calendar",
+      "location": "",
+      "attendees": ["Josh Carper"],
+      "isOnline": true
+    }
+  ]
+}

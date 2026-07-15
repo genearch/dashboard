@@ -1,0 +1,217 @@
+/* ==========================================================================
+   Dashboard v2 — Mobile overrides (iPhone-first)
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    width: min(300px, 82vw);
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform var(--duration-medium) var(--ease-out-soft);
+    padding-top: max(24px, env(safe-area-inset-top));
+    padding-left: max(20px, env(safe-area-inset-left));
+    box-shadow: var(--shadow-flyout);
+  }
+
+  .sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-surface-2);
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    position: absolute;
+    top: max(20px, env(safe-area-inset-top));
+    right: 16px;
+  }
+
+  .sidebar-scrim {
+    position: fixed;
+    inset: 0;
+    background: var(--color-overlay-scrim);
+    z-index: 49;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-medium) var(--ease-standard);
+  }
+
+  .sidebar-scrim.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .main-scroll {
+    padding: max(20px, env(safe-area-inset-top)) 18px calc(24px + env(safe-area-inset-bottom));
+  }
+
+  .header {
+    align-items: center;
+    margin-bottom: 22px;
+  }
+
+  .hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 50%;
+    background: var(--color-card);
+    border: 1px solid var(--color-hairline);
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+    margin-right: 12px;
+  }
+
+  .header-titles {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .greeting-name {
+    font-size: 34px;
+  }
+
+  .greeting-eyebrow {
+    font-size: 14px;
+  }
+
+  .icon-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .quick-summary-card {
+    padding: 16px;
+  }
+
+  .quick-summary {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 14px;
+  }
+
+  .quick-tile {
+    padding: 4px 6px;
+    border-right: 1px solid var(--color-hairline);
+  }
+
+  .quick-tile:nth-child(3n) {
+    border-right: none;
+  }
+
+  .quick-tile:nth-child(-n+3) {
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .quick-tile-number {
+    font-size: 22px;
+  }
+
+  .header-avatar {
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
+  }
+
+  .header .greeting-name {
+    font-size: 21px;
+    gap: 6px;
+  }
+
+  .greeting-glyph {
+    font-size: 18px;
+  }
+
+  .card-grid,
+  .two-col-row,
+  .half-row {
+    grid-template-columns: 1fr;
+  }
+
+  .card--today,
+  .card--oura,
+  .card--weather,
+  .card--markets,
+  .card--trips {
+    grid-column: auto;
+  }
+
+  .card {
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .weather-columns {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .weather-col {
+    padding: 12px 8px;
+  }
+
+  .weather-col-current {
+    font-size: 20px;
+  }
+
+  .sheet {
+    left: 12px;
+    right: 12px;
+    top: max(12px, env(safe-area-inset-top));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: auto;
+    padding: 20px;
+    padding-top: max(20px, env(safe-area-inset-top));
+  }
+
+  .nav-link,
+  .card--tappable,
+  .hamburger,
+  .sheet-close,
+  .segment-card {
+    min-height: 48px;
+  }
+
+  .segment-card {
+    flex: 0 0 78vw;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom));
+  }
+
+  .footer-build {
+    text-align: left;
+  }
+}
+
+@media (min-width: 901px) {
+  .hamburger,
+  .sidebar-close,
+  .sidebar-scrim {
+    display: none !important;
+  }
+}

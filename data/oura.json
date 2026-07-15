@@ -1,0 +1,13 @@
+{
+  "_comment": "Seeded with real data pulled from the connected Health MCP (Oura ring, Apple Watch, Withings scale) on 2026-07-14. See js/oura.js for the live-fetch integration point.",
+  "days": [
+    { "date": "2026-07-07", "totalSleepMinutes": 400, "sleepEfficiency": 88.9, "deepSleepMinutes": 45, "remSleepMinutes": 90, "coreSleepMinutes": 265, "awakeMinutes": 45, "awakeningCount": 5, "hrv": 24.4, "hrvSource": "OURA_RING", "restingHR": 52, "restingHRSource": "WITHINGS" },
+    { "date": "2026-07-08", "totalSleepMinutes": 295, "sleepEfficiency": 85.5, "deepSleepMinutes": 30, "remSleepMinutes": 30, "coreSleepMinutes": 235, "awakeMinutes": 35, "awakeningCount": 5, "hrv": 23.6, "hrvSource": "OURA_RING", "restingHR": 53, "restingHRSource": "WITHINGS" },
+    { "date": "2026-07-09", "totalSleepMinutes": 395, "sleepEfficiency": 84.0, "deepSleepMinutes": 60, "remSleepMinutes": 35, "coreSleepMinutes": 300, "awakeMinutes": 70, "awakeningCount": 8, "hrv": 28.5, "hrvSource": "OURA_RING", "restingHR": 54, "restingHRSource": "WITHINGS" },
+    { "date": "2026-07-10", "totalSleepMinutes": 400, "sleepEfficiency": 87.9, "deepSleepMinutes": 50, "remSleepMinutes": 10, "coreSleepMinutes": 340, "awakeMinutes": 20, "awakeningCount": 2, "hrv": 19.8, "hrvSource": "OURA_RING", "restingHR": 56, "restingHRSource": "WITHINGS" },
+    { "date": "2026-07-11", "totalSleepMinutes": 470, "sleepEfficiency": 81.0, "deepSleepMinutes": 65, "remSleepMinutes": 85, "coreSleepMinutes": 320, "awakeMinutes": 105, "awakeningCount": 9, "hrv": 13.1, "hrvSource": "OURA_RING", "restingHR": 50, "restingHRSource": "WITHINGS" },
+    { "date": "2026-07-12", "totalSleepMinutes": 350, "sleepEfficiency": 76.9, "deepSleepMinutes": 90, "remSleepMinutes": 50, "coreSleepMinutes": 210, "awakeMinutes": 80, "awakeningCount": 6, "hrv": 47.0, "hrvSource": "APPLE_WATCH", "restingHR": 34, "restingHRSource": "WITHINGS" },
+    { "date": "2026-07-13", "totalSleepMinutes": 255, "sleepEfficiency": 77.3, "deepSleepMinutes": 50, "remSleepMinutes": 30, "coreSleepMinutes": 175, "awakeMinutes": 55, "awakeningCount": 3, "hrv": 121.2, "hrvSource": "APPLE_WATCH", "restingHR": 34, "restingHRSource": "WITHINGS" },
+    { "date": "2026-07-14", "totalSleepMinutes": 285, "sleepEfficiency": 70.4, "deepSleepMinutes": 25, "remSleepMinutes": 15, "coreSleepMinutes": 245, "awakeMinutes": 110, "awakeningCount": 4, "hrv": 107.4, "hrvSource": "APPLE_WATCH", "restingHR": 66, "restingHRSource": "APPLE_WATCH", "bodyTemperature": null }
+  ]
+}

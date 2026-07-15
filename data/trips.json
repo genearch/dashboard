@@ -1,0 +1,45 @@
+{
+  "_comment": "Seeded from live tripsy_trips_list / tripsy_transportations_list / tripsy_hostings_list calls on 2026-07-14. See js/travel.js for the live-fetch integration point.",
+  "trips": [
+    {
+      "id": "1138003",
+      "name": "RSPA",
+      "destination": "Las Vegas",
+      "countryFlag": "🇺🇸",
+      "startsAt": "2026-07-26",
+      "endsAt": "2026-07-28",
+      "segments": [
+        {
+          "type": "flight",
+          "route": "LAX → LAS",
+          "date": "07/26",
+          "company": "American Airlines",
+          "flightNumber": "AA6425",
+          "seat": "3D",
+          "seatClass": "First",
+          "departure": "2026-07-26T15:10:00Z",
+          "arrival": "2026-07-26T16:33:00Z"
+        },
+        {
+          "type": "hotel",
+          "name": "The LINQ Hotel",
+          "room": "District 3 | Deluxe Room | King",
+          "checkIn": "2026-07-26",
+          "checkOut": "2026-07-28",
+          "address": "3535 Las Vegas Boulevard South, Las Vegas, NV"
+        },
+        {
+          "type": "flight",
+          "route": "LAS → LAX",
+          "date": "07/28",
+          "company": "American Airlines",
+          "flightNumber": "AA2039",
+          "seat": null,
+          "seatClass": "First",
+          "departure": "2026-07-28T21:36:00Z",
+          "arrival": "2026-07-28T22:54:00Z"
+        }
+      ]
+    }
+  ]
+}
