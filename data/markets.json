@@ -1,5 +1,5 @@
 {
-  "_comment": "Updated with real quotes pulled via web search on 2026-07-14 (Yahoo Finance / CNBC / FX Leaders). Portfolio basis ($148.20/share, 500 shares) is still a placeholder — swap in your real cost basis, or wire js/markets.js to a live brokerage/quote API. See js/markets.js for the integration point.",
+  "_comment": "Updated with real quotes pulled via web search on 2026-07-14 (Yahoo Finance / CNBC / FX Leaders). Portfolio basis is Gene's real cost basis ($77.25/share, 500 shares).",
   "indices": [
     { "symbol": "DOW", "name": "Dow Jones", "price": 52508.27, "changePct": 0.02 },
     { "symbol": "NASDAQ", "name": "Nasdaq", "price": 26107.01, "changePct": 0.9 },
@@ -12,7 +12,7 @@
   "portfolio": {
     "symbol": "AAPL",
     "shares": 500,
-    "basisPerShare": 148.20,
+    "basisPerShare": 77.25,
     "currentPrice": 314.86
   }
 }
