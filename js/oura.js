@@ -148,7 +148,7 @@ function deltaLabel(current, baselineArr, { unit = "", decimals = 0, invert = fa
   if (Math.abs(diff) < 0.05) return { text: "steady", color: "var(--color-text-tertiary)" };
   const good = invert ? diff < 0 : diff > 0;
   const arrow = diff > 0 ? "▲" : "▼";
-  const text = `${arrow} ${Math.abs(diff).toFixed(decimals)}${unit} vs avg`;
+  const text = `${arrow}${Math.abs(diff).toFixed(decimals)}${unit}`;
   return { text, color: good ? "var(--accent-markets)" : "var(--accent-health)" };
 }
 
@@ -197,7 +197,7 @@ export function renderOuraRings(container, summary) {
   const hrvItem = buildRingItem({
     svg: ringSVG({ pct: (last.hrv - hrvMin) / ((hrvMax - hrvMin) || 1), series: hrvSeries, color: "var(--accent-markets)" }),
     number: Math.round(last.hrv),
-    unit: "ms HRV",
+    unit: "ms",
     delta: hrvDelta,
     label: "HRV",
   });
@@ -211,7 +211,7 @@ export function renderOuraRings(container, summary) {
   const rhrItem = buildRingItem({
     svg: ringSVG({ pct: rhrPct, series: rhrSeries, color: "var(--accent-health)" }),
     number: Math.round(last.restingHR),
-    unit: "bpm RHR",
+    unit: "bpm",
     delta: rhrDelta,
     label: "Resting HR",
   });

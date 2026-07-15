@@ -357,8 +357,8 @@ a {
 
 .mini-ring {
   position: relative;
-  width: 74px;
-  height: 74px;
+  width: 82px;
+  height: 82px;
 }
 
 .mini-ring svg {
@@ -395,20 +395,23 @@ a {
   font-weight: 700;
   letter-spacing: -0.01em;
   font-variant-numeric: tabular-nums;
-  line-height: 1.1;
+  line-height: 1.15;
+  white-space: nowrap;
 }
 
 .mini-ring-unit {
-  font-size: 8px;
+  font-size: 8.5px;
   color: var(--color-text-tertiary);
   font-weight: 500;
   line-height: 1.3;
+  white-space: nowrap;
 }
 
 .mini-ring-delta {
-  font-size: 7.5px;
+  font-size: 8px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.3;
+  white-space: nowrap;
 }
 
 .mini-ring-label {

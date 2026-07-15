@@ -92,12 +92,17 @@
   }
 
   .mini-ring {
-    width: 64px;
-    height: 64px;
+    width: 70px;
+    height: 70px;
   }
 
   .mini-ring-number {
     font-size: 14px;
+  }
+
+  .mini-ring-unit,
+  .mini-ring-delta {
+    font-size: 7.5px;
   }
 
   .weather-columns {
