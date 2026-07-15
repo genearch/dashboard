@@ -1164,6 +1164,32 @@ a {
   align-self: flex-start;
 }
 
+.card-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 2px;
+}
+
+.card-footer-row .card-footer-link {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.card-footer-refresh {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+}
+
+.card-footer-refresh .icon-btn--small {
+  width: 28px;
+  height: 28px;
+}
+
 .row-label-line {
   display: flex;
   align-items: center;

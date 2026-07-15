@@ -237,6 +237,8 @@ async function boot() {
 async function loadAll(sheetApi, isManualRefresh) {
   const refreshBtn = $("#refreshBtn");
   refreshBtn?.classList.add("is-spinning");
+  $("#marketsRefreshBtn")?.classList.add("is-spinning");
+  $("#weatherRefreshBtn")?.classList.add("is-spinning");
 
   const today = new Date();
 
@@ -281,6 +283,14 @@ async function loadAll(sheetApi, isManualRefresh) {
     marketPill.style.color = open ? "var(--accent-markets)" : "var(--color-text-tertiary)";
     marketPill.style.background = open ? "rgba(52, 199, 89, 0.14)" : "var(--color-surface-2)";
   }
+  const marketsUpdatedEl = $("#marketsUpdatedAt");
+  if (marketsUpdatedEl) {
+    marketsUpdatedEl.textContent = `Updated ${today.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
+  }
+  $("#marketsRefreshBtn")?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    loadAll(sheetApi, true);
+  });
 
   // Trips card
   TravelMod.renderTripSummary($("#tripSummary"), trip, today);
@@ -348,6 +358,8 @@ async function loadAll(sheetApi, isManualRefresh) {
   $('[data-card="trips"]')?.addEventListener("click", tripsHandler);
 
   refreshBtn?.classList.remove("is-spinning");
+  $("#marketsRefreshBtn")?.classList.remove("is-spinning");
+  $("#weatherRefreshBtn")?.classList.remove("is-spinning");
   renderFooterClock();
 }
 
