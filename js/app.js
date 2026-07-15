@@ -6,12 +6,12 @@
 // module on each deploy, instead of silently serving whatever was last
 // cached (this is what caused the stale-JS layout bugs in Safari — bump
 // this any time app.js or any imported module changes).
-import * as CalendarMod from "./calendar.js?v=18";
-import * as OuraMod from "./oura.js?v=18";
-import * as WeatherMod from "./weather.js?v=18";
-import * as MarketsMod from "./markets.js?v=18";
-import * as TravelMod from "./travel.js?v=18";
-import * as BirthdaysMod from "./birthdays.js?v=18";
+import * as CalendarMod from "./calendar.js?v=19";
+import * as OuraMod from "./oura.js?v=19";
+import * as WeatherMod from "./weather.js?v=19";
+import * as MarketsMod from "./markets.js?v=19";
+import * as TravelMod from "./travel.js?v=19";
+import * as BirthdaysMod from "./birthdays.js?v=19";
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
