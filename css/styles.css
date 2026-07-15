@@ -260,7 +260,7 @@ a {
   font-weight: 700;
   letter-spacing: -0.02em;
   margin: 0 0 6px;
-  background: linear-gradient(180deg, var(--color-text-primary), var(--color-text-primary));
+  color: var(--color-text-primary);
 }
 
 .greeting-date {
