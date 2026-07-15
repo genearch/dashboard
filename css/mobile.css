@@ -91,18 +91,26 @@
     border-radius: 22px;
   }
 
+  .oura-rings-grid {
+    gap: 6px;
+  }
+
   .mini-ring {
-    width: 70px;
-    height: 70px;
+    width: 74px;
+    height: 74px;
   }
 
   .mini-ring-number {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .mini-ring-unit,
   .mini-ring-delta {
     font-size: 7.5px;
+  }
+
+  .mini-ring-label {
+    font-size: 10px;
   }
 
   .weather-columns {
