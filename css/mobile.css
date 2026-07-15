@@ -98,17 +98,21 @@
   }
 
   .mini-ring {
-    width: 74px;
-    height: 74px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .mini-ring-center {
+    padding: 0 12px;
   }
 
   .mini-ring-number {
-    font-size: 15px;
+    font-size: 13px;
   }
 
   .mini-ring-unit,
   .mini-ring-delta {
-    font-size: 7.5px;
+    font-size: 7px;
   }
 
   .mini-ring-label {
