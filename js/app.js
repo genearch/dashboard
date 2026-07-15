@@ -30,8 +30,15 @@ function applyTheme() {
   const pref = getStoredTheme();
   const resolved = pref === "auto" ? (systemPrefersLight() ? "light" : "dark") : pref;
   document.documentElement.setAttribute("data-theme", resolved);
-  const toggle = $("#darkModeToggle");
-  if (toggle) toggle.checked = resolved === "dark";
+
+  const sunIcon = $("#themeToggleIconSun");
+  const moonIcon = $("#themeToggleIconMoon");
+  if (sunIcon && moonIcon) {
+    // Sun = tap to go dark (we're in light mode); Moon = tap to go light (we're in dark mode).
+    sunIcon.style.display = resolved === "dark" ? "" : "none";
+    moonIcon.style.display = resolved === "dark" ? "none" : "";
+  }
+
   const themeColorMeta = $('meta[name="theme-color"]');
   if (themeColorMeta) {
     themeColorMeta.setAttribute("content", resolved === "dark" ? "#111315" : "#F2F1F6");
@@ -43,9 +50,10 @@ function initTheme() {
   window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", () => {
     if (getStoredTheme() === "auto") applyTheme();
   });
-  const toggle = $("#darkModeToggle");
-  toggle?.addEventListener("change", () => {
-    localStorage.setItem(THEME_KEY, toggle.checked ? "dark" : "light");
+  $("#themeToggleBtn")?.addEventListener("click", () => {
+    const pref = getStoredTheme();
+    const current = pref === "auto" ? (systemPrefersLight() ? "light" : "dark") : pref;
+    localStorage.setItem(THEME_KEY, current === "dark" ? "light" : "dark");
     applyTheme();
   });
 }
