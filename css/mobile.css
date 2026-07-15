@@ -94,25 +94,27 @@
   }
 
   .oura-rings-grid {
-    gap: 6px;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 20px;
+    column-gap: 6px;
   }
 
   .mini-ring {
-    width: 96px;
-    height: 96px;
+    width: 130px;
+    height: 130px;
   }
 
   .mini-ring-center {
-    padding: 0 12px;
+    padding: 0 20px;
   }
 
   .mini-ring-number {
-    font-size: 17px;
+    font-size: 21px;
   }
 
   .mini-ring-unit,
   .mini-ring-delta {
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .mini-ring-label {

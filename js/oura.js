@@ -154,16 +154,14 @@ export function renderOuraRings(container, summary) {
 
   // Sleep
   const sleepSeries = days.map((d) => d.totalSleepMinutes);
-  const sleepHrs = Math.floor(last.totalSleepMinutes / 60);
-  const sleepMin = last.totalSleepMinutes % 60;
+  const sleepDecimal = (last.totalSleepMinutes / 60).toFixed(1);
   const sleepDelta = deltaLabel(last.totalSleepMinutes / 60, baseline.map((d) => d.totalSleepMinutes / 60), { unit: "h", decimals: 1 });
   const sleepItem = buildRingItem({
     svg: ringSVG({ pct: last.totalSleepMinutes / 480, series: sleepSeries, color: "var(--accent-calendar)" }),
-    number: `${sleepHrs}h${sleepMin}m`,
+    number: `${sleepDecimal}h`,
     unit: "sleep",
     delta: sleepDelta,
     label: "Sleep",
-    numberSize: "15px",
   });
 
   // HRV
