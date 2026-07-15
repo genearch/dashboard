@@ -2,7 +2,7 @@
    service-worker.js — offline caching for Dashboard v2
    ========================================================================== */
 
-const CACHE_NAME = "dashboard-v2-cache-v4";
+const CACHE_NAME = "dashboard-v2-cache-v5";
 
 const APP_SHELL = [
   "./",
@@ -43,16 +43,18 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Network-first for cross-origin API calls (weather) and for the app shell
-// (HTML/CSS/JS) so deploys show up on next reload instead of waiting on a
-// cache-name bump. Cache-first only for heavier static assets (icons, data
-// snapshots) where staleness for a few minutes doesn't break the layout.
+// Network-first (with a true no-store fetch, bypassing HTTP/CDN caching) for
+// everything except icon images — those are the only assets that never
+// change, so they're safe to serve cache-first for instant paint + offline
+// support. Data snapshots (data/*.json) and the app shell (html/css/js) all
+// go network-first so pushed updates show up on the very next load instead
+// of waiting out a cache-name bump or a CDN's max-age window.
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
 
-  const isAppCode = url.origin === self.location.origin && /\.(html|css|js)$/.test(url.pathname) || event.request.mode === "navigate";
+  const isIcon = url.origin === self.location.origin && /\/assets\/icons\//.test(url.pathname);
 
-  if (url.origin !== self.location.origin || isAppCode) {
+  if (url.origin !== self.location.origin || !isIcon) {
     // cache: "no-store" bypasses the browser's HTTP cache (and any CDN
     // max-age) so "network-first" actually means fresh, not "whatever the
     // disk cache still has from 10 minutes ago."
