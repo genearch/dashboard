@@ -2,7 +2,7 @@
    service-worker.js — offline caching for Dashboard v2
    ========================================================================== */
 
-const CACHE_NAME = "dashboard-v2-cache-v1";
+const CACHE_NAME = "dashboard-v2-cache-v2";
 
 const APP_SHELL = [
   "./",
@@ -43,13 +43,25 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Network-first for cross-origin API calls (weather), cache-first for the app shell.
+// Network-first for cross-origin API calls (weather) and for HTML/JS so
+// deploys show up on next reload instead of waiting on a cache-name bump.
+// Cache-first for static assets (css, icons, data snapshots).
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
 
-  if (url.origin !== self.location.origin) {
+  const isAppCode = url.origin === self.location.origin && /\.(html|js)$/.test(url.pathname) || event.request.mode === "navigate";
+
+  if (url.origin !== self.location.origin || isAppCode) {
     event.respondWith(
-      fetch(event.request).catch(() => caches.match(event.request))
+      fetch(event.request)
+        .then((response) => {
+          if (response && response.status === 200 && url.origin === self.location.origin) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request))
     );
     return;
   }

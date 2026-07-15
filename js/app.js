@@ -34,9 +34,9 @@ function applyTheme() {
   const sunIcon = $("#themeToggleIconSun");
   const moonIcon = $("#themeToggleIconMoon");
   if (sunIcon && moonIcon) {
-    // Sun = tap to go dark (we're in light mode); Moon = tap to go light (we're in dark mode).
-    sunIcon.style.display = resolved === "dark" ? "" : "none";
-    moonIcon.style.display = resolved === "dark" ? "none" : "";
+    // Icon reflects the current mode: sun while light, moon while dark.
+    sunIcon.style.display = resolved === "light" ? "" : "none";
+    moonIcon.style.display = resolved === "light" ? "none" : "";
   }
 
   const themeColorMeta = $('meta[name="theme-color"]');
