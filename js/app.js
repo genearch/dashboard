@@ -78,13 +78,38 @@ function renderGreeting() {
   const now = new Date();
   const hour = now.getHours();
   $("#greetingEyebrow").textContent = greetingForHour(hour);
-  $("#greetingGlyph").textContent = hour >= 6 && hour < 20 ? "☀️" : "🌙";
   $("#greetingDate").textContent = now.toLocaleDateString([], {
     weekday: "long",
     month: "long",
     day: "numeric",
     year: "numeric",
   });
+}
+
+/* ---------------------------------------------------------------------- *
+ * Day-of-week banner — current week, today highlighted in gold.
+ * ---------------------------------------------------------------------- */
+
+function renderDayBanner() {
+  const container = $("#dayBanner");
+  if (!container) return;
+  const today = new Date();
+  const startOfWeek = new Date(today);
+  startOfWeek.setDate(today.getDate() - today.getDay() + 1); // Monday start
+
+  container.innerHTML = "";
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(startOfWeek);
+    d.setDate(startOfWeek.getDate() + i);
+    const isToday = d.toDateString() === today.toDateString();
+    const cell = document.createElement("div");
+    cell.className = `day-banner-cell${isToday ? " is-today" : ""}`;
+    cell.innerHTML = `
+      <span class="day-banner-label">${d.toLocaleDateString([], { weekday: "short" })}</span>
+      <span class="day-banner-num">${d.getDate()}</span>
+    `;
+    container.appendChild(cell);
+  }
 }
 
 function renderFooterClock() {
@@ -167,7 +192,7 @@ function renderQuickSummary({ calendarSummary, ouraSummary, weather, trip, marke
   const tiles = [
     { icon: QUICK_ICONS.calendar, accent: "accent-calendar", number: calendarSummary.events.length, label: calendarSummary.events.length === 1 ? "event today" : "events today", target: "today" },
     { icon: QUICK_ICONS.reminders, accent: "accent-calendar", number: calendarSummary.reminders.length, label: "due today", target: "today" },
-    { icon: QUICK_ICONS.cake, accent: "accent-birthdays", number: birthdaysSummary.next30.length, label: "upcoming (30 days)", target: "today" },
+    { icon: QUICK_ICONS.cake, accent: "accent-birthdays", number: birthdaysSummary.next3.length, label: "birthdays (3 days)", target: "today" },
     { icon: QUICK_ICONS.plane, accent: "accent-travel", number: trip ? tripDeparts : "–", label: trip ? "days" : "no trips", target: "trips" },
     { icon: QUICK_ICONS.sun, accent: "accent-weather", number: `${camarillo.current}°F`, label: `${camarillo.condition} · ${camarillo.name}`, target: "weather" },
     { icon: QUICK_ICONS.heart, accent: "accent-health", number: ouraSummary.readiness, label: OuraMod.readinessLabel(ouraSummary.readiness), target: "oura", isStatus: true, statusColor: ouraSummary.readiness >= 70 ? "var(--accent-markets)" : ouraSummary.readiness >= 50 ? "var(--accent-weather)" : "var(--accent-health)" },
@@ -202,6 +227,7 @@ function renderQuickSummary({ calendarSummary, ouraSummary, weather, trip, marke
 async function boot() {
   initTheme();
   renderGreeting();
+  renderDayBanner();
   renderFooterClock();
   setInterval(renderFooterClock, 30000);
   const sheetApi = initSheet();
@@ -254,6 +280,10 @@ async function loadAll(sheetApi, isManualRefresh) {
     e.stopPropagation();
     loadAll(sheetApi, true);
   });
+
+  // Hero weather (header)
+  const camarillo = weather.find((w) => w.id === "camarillo") || weather[0];
+  WeatherMod.renderHeroWeather($("#heroWeather"), camarillo);
 
   // Weather card
   WeatherMod.renderWeatherColumns($("#weatherColumns"), weather);

@@ -255,13 +255,19 @@ a {
 }
 
 .card-title {
-  font-size: 20px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
   margin: 0;
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.card-title-icon {
+  width: 15px;
+  height: 15px;
 }
 
 .card-title .dot {
@@ -944,65 +950,167 @@ a {
   flex-shrink: 0;
 }
 
-/* ---- Header (redesign) ---- */
+/* ---- Header hero (photo-style) ---- */
 
-.header {
-  align-items: center;
-  gap: 14px;
-}
-
-.header-avatar {
+.header.hero {
   position: relative;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent-calendar), var(--accent-travel));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-weight: 600;
-  font-size: 16px;
-  flex-shrink: 0;
+  display: block;
+  height: 230px;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  margin-bottom: 14px;
+  padding: 0;
+  background: linear-gradient(160deg, #2A0E14 0%, #4A1522 35%, #6B1F2E 60%, #3A1420 85%, #180A0C 100%);
+  box-shadow: var(--shadow-card);
 }
 
-.avatar-status-dot {
+[data-theme="light"] .header.hero {
+  background: linear-gradient(160deg, #C98A5A 0%, #B85A3E 35%, #8A3A38 60%, #5A2530 85%, #3A1620 100%);
+}
+
+.hero-scrim {
   position: absolute;
-  bottom: -1px;
-  right: -1px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--accent-markets);
-  border: 2px solid var(--color-bg);
+  inset: 0;
+  background: linear-gradient(0deg, rgba(13, 7, 8, 0.9) 0%, rgba(13, 7, 8, 0.1) 55%, rgba(13, 7, 8, 0.3) 100%);
+  pointer-events: none;
 }
 
-.header-titles {
-  flex: 1;
-  min-width: 0;
-}
-
-.header .greeting-name {
-  font-size: 28px;
+.hero-actions {
+  position: absolute;
+  top: 14px;
+  right: 14px;
   display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 8px;
+  z-index: 2;
+}
+
+.hero-icon-btn {
+  width: 32px;
+  height: 32px;
+  background: rgba(13, 7, 8, 0.5);
+  border: 1px solid var(--accent-gold-dim);
+  color: var(--accent-gold);
+}
+
+.hero-icon-btn:hover {
+  background: rgba(13, 7, 8, 0.7);
+}
+
+.hero-titles {
+  position: absolute;
+  top: 50px;
+  left: 18px;
+  right: 18px;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent-gold);
+  margin-bottom: 6px;
+}
+
+.hero-name {
+  font-family: var(--font-family-serif);
+  font-size: 32px;
+  font-weight: 600;
+  color: #F5EBDD;
+  line-height: 1.1;
+  margin: 0 0 8px;
+}
+
+.hero-date {
+  font-size: 17px;
+  font-weight: 500;
+  color: #E4D7C7;
   margin: 0;
 }
 
-.greeting-glyph {
-  font-size: 22px;
-}
-
-.header .greeting-date {
-  margin: 2px 0 0;
-}
-
-.header-actions {
+.hero-weather {
+  position: absolute;
+  bottom: 16px;
+  left: 18px;
+  right: 18px;
+  z-index: 2;
   display: flex;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hero-weather-icon {
+  font-size: 34px;
+  line-height: 1;
+  margin-right: 10px;
+}
+
+.hero-weather-main {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+}
+
+.hero-weather-temp {
+  font-family: var(--font-family-serif);
+  font-size: 34px;
+  font-weight: 600;
+  color: #F5EBDD;
+  line-height: 1;
+}
+
+.hero-weather-sub {
+  font-size: 12px;
+  color: #D9CCBC;
+  margin-left: 10px;
+}
+
+.hero-weather-range {
+  text-align: right;
+  font-size: 12px;
+  color: #C4B7A6;
+  line-height: 1.5;
   flex-shrink: 0;
+}
+
+/* ---- Day-of-week banner ---- */
+
+.day-banner {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 2px 20px;
+}
+
+.day-banner-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 34px;
+  padding: 4px 8px;
+  border-radius: 10px;
+  color: var(--color-text-tertiary);
+}
+
+.day-banner-label {
+  font-size: 11px;
+}
+
+.day-banner-num {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.day-banner-cell.is-today {
+  background: var(--accent-gold);
+}
+
+.day-banner-cell.is-today .day-banner-label,
+.day-banner-cell.is-today .day-banner-num {
+  color: var(--color-text-on-accent);
 }
 
 .icon-btn {
@@ -1044,8 +1152,8 @@ a {
 /* ---- Quick summary (single card w/ dividers) ---- */
 
 .quick-summary-card {
-  padding: 20px 24px;
-  margin-bottom: 20px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
 }
 
 .quick-summary {
@@ -1059,11 +1167,11 @@ a {
   border-radius: 0;
   box-shadow: none;
   border-right: 1px solid var(--color-hairline);
-  padding: 4px 16px;
+  padding: 2px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 3px;
   text-align: center;
   min-height: auto;
   transition: opacity var(--duration-fast) var(--ease-standard);
@@ -1080,16 +1188,18 @@ a {
 }
 
 .quick-tile-icon {
-  font-size: 22px;
+  font-size: 15px;
   line-height: 1;
 }
 
 .quick-tile-icon svg {
   display: block;
+  width: 14px;
+  height: 14px;
 }
 
 .quick-tile-number {
-  font-size: 26px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
@@ -1100,11 +1210,11 @@ a {
 }
 
 .quick-tile-text {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 500;
   color: var(--color-text-tertiary);
-  line-height: 1.3;
-  -webkit-line-clamp: 2;
+  line-height: 1.2;
+  -webkit-line-clamp: 1;
 }
 
 /* ---- Card footer link ---- */

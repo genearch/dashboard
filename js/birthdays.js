@@ -53,16 +53,17 @@ export async function getBirthdaysSummary(today = new Date()) {
 
   const todayList = withDates.filter((b) => b.daysUntil === 0);
   const tomorrow = withDates.filter((b) => b.daysUntil === 1);
+  const next3 = withDates.filter((b) => b.daysUntil >= 0 && b.daysUntil <= 3);
   const next30 = withDates.filter((b) => b.daysUntil >= 0 && b.daysUntil <= 30);
 
-  return { all: withDates, today: todayList, tomorrow, next30 };
+  return { all: withDates, today: todayList, tomorrow, next3, next30 };
 }
 
-export function renderBirthdayUpcomingRows(container, summary, limit = 4) {
+export function renderBirthdayUpcomingRows(container, summary) {
   container.innerHTML = "";
-  const upcoming = summary.next30.slice(0, limit);
+  const upcoming = summary.next3;
   if (upcoming.length === 0) {
-    container.innerHTML = `<div class="event-empty">Nothing in the next 30 days</div>`;
+    container.innerHTML = `<div class="event-empty">Nothing in the next 3 days</div>`;
     return;
   }
   upcoming.forEach((b) => {

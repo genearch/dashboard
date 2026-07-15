@@ -115,6 +115,21 @@ export function renderWeatherColumns(container, locations) {
   });
 }
 
+export function renderHeroWeather(container, loc) {
+  const toC = (f) => (typeof f === "number" ? Math.round(((f - 32) * 5) / 9) : "--");
+  container.innerHTML = `
+    <span class="hero-weather-icon">${loc.icon}</span>
+    <div class="hero-weather-main">
+      <div class="hero-weather-temp">${loc.current}°F</div>
+      <div class="hero-weather-sub">${loc.condition} · ${loc.name}</div>
+    </div>
+    <div class="hero-weather-range">
+      <div>H ${loc.high}° · L ${loc.low}°</div>
+      <div>${toC(loc.high)}°C / ${toC(loc.low)}°C</div>
+    </div>
+  `;
+}
+
 export function renderForecast(container, loc) {
   container.innerHTML = "";
   if (!loc.daily.length) {

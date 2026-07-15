@@ -6,38 +6,42 @@
    ========================================================================== */
 
 :root {
-  /* ---- Surfaces ---- */
-  --color-bg: #111315;
-  --color-card: #1C1F24;
-  --color-card-gradient-start: rgba(255, 255, 255, 0.035);
-  --color-card-gradient-end: rgba(255, 255, 255, 0);
-  --color-surface-2: #262A30;
-  --color-hairline: rgba(255, 255, 255, 0.06);
-  --color-overlay-scrim: rgba(8, 9, 10, 0.55);
+  /* ---- Surfaces (warm near-black, burgundy undertone) ---- */
+  --color-bg: #0D0708;
+  --color-card: #170D0F;
+  --color-card-gradient-start: rgba(212, 165, 72, 0.035);
+  --color-card-gradient-end: rgba(212, 165, 72, 0);
+  --color-surface-2: #221317;
+  --color-hairline: rgba(212, 165, 72, 0.14);
+  --color-overlay-scrim: rgba(13, 7, 8, 0.6);
 
   /* ---- Text ---- */
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #B3BAC5;
-  --color-text-tertiary: #7A8190;
-  --color-text-on-accent: #FFFFFF;
+  --color-text-primary: #F5EBDD;
+  --color-text-secondary: #C4B7A6;
+  --color-text-tertiary: #8F8378;
+  --color-text-on-accent: #180A0C;
 
-  /* ---- Accents ---- */
-  --accent-calendar: #4A90E2;
-  --accent-weather: #F5A623;
-  --accent-health: #E74C3C;
-  --accent-markets: #34C759;
-  --accent-markets-down: #FF3B30;
-  --accent-travel: #8E44AD;
-  --accent-birthdays: #FF5FA2;
+  /* ---- Gold accent (primary brand) ---- */
+  --accent-gold: #D4A548;
+  --accent-gold-dim: rgba(212, 165, 72, 0.5);
+
+  /* ---- Accents (retinted warm) ---- */
+  --accent-calendar: #D4A548;
+  --accent-weather: #C98A3E;
+  --accent-health: #B85C4C;
+  --accent-markets: #6B8F5E;
+  --accent-markets-down: #B85C4C;
+  --accent-travel: #A5793F;
+  --accent-birthdays: #C46B7A;
 
   /* ---- Elevation ---- */
-  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.35);
-  --shadow-card-hover: 0 2px 4px rgba(0, 0, 0, 0.35), 0 20px 48px rgba(0, 0, 0, 0.45);
-  --shadow-flyout: 0 24px 64px rgba(0, 0, 0, 0.55);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 32px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 2px 4px rgba(0, 0, 0, 0.4), 0 20px 48px rgba(0, 0, 0, 0.5);
+  --shadow-flyout: 0 24px 64px rgba(0, 0, 0, 0.6);
 
   /* ---- Radii ---- */
-  --radius-card: 24px;
-  --radius-tile: 20px;
+  --radius-card: 20px;
+  --radius-tile: 18px;
   --radius-pill: 999px;
   --radius-control: 14px;
 
@@ -51,27 +55,36 @@
   /* ---- Type ---- */
   --font-family: -apple-system, "SF Pro Display", "SF Pro Text", "Segoe UI",
     system-ui, Roboto, Helvetica, Arial, sans-serif;
+  --font-family-serif: "Fraunces", Georgia, "Times New Roman", serif;
 
   color-scheme: dark;
 }
 
 [data-theme="light"] {
-  --color-bg: #F2F1F6;
+  --color-bg: #F7F0E6;
   --color-card: #FFFFFF;
-  --color-card-gradient-start: rgba(0, 0, 0, 0.025);
-  --color-card-gradient-end: rgba(0, 0, 0, 0);
-  --color-surface-2: #EAE9EF;
-  --color-hairline: rgba(0, 0, 0, 0.07);
-  --color-overlay-scrim: rgba(20, 20, 24, 0.35);
+  --color-card-gradient-start: rgba(107, 40, 30, 0.025);
+  --color-card-gradient-end: rgba(107, 40, 30, 0);
+  --color-surface-2: #EFE4D3;
+  --color-hairline: rgba(107, 40, 30, 0.12);
+  --color-overlay-scrim: rgba(30, 15, 15, 0.35);
 
-  --color-text-primary: #14161A;
-  --color-text-secondary: #5B616E;
-  --color-text-tertiary: #8A8F99;
+  --color-text-primary: #241512;
+  --color-text-secondary: #6B5B4E;
+  --color-text-tertiary: #948575;
   --color-text-on-accent: #FFFFFF;
 
-  --shadow-card: 0 1px 1px rgba(20, 20, 24, 0.04), 0 12px 28px rgba(20, 20, 24, 0.08);
-  --shadow-card-hover: 0 2px 3px rgba(20, 20, 24, 0.06), 0 18px 40px rgba(20, 20, 24, 0.12);
-  --shadow-flyout: 0 24px 64px rgba(20, 20, 24, 0.22);
+  --accent-calendar: #A5793F;
+  --accent-weather: #B87333;
+  --accent-health: #A5453A;
+  --accent-markets: #4F7A45;
+  --accent-markets-down: #A5453A;
+  --accent-travel: #8A5F2E;
+  --accent-birthdays: #A5455A;
+
+  --shadow-card: 0 1px 1px rgba(40, 20, 15, 0.05), 0 12px 28px rgba(40, 20, 15, 0.08);
+  --shadow-card-hover: 0 2px 3px rgba(40, 20, 15, 0.07), 0 18px 40px rgba(40, 20, 15, 0.12);
+  --shadow-flyout: 0 24px 64px rgba(40, 20, 15, 0.22);
 
   color-scheme: light;
 }

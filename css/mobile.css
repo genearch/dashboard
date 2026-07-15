@@ -7,22 +7,34 @@
     padding: max(20px, env(safe-area-inset-top)) 18px calc(24px + env(safe-area-inset-bottom));
   }
 
-  .header {
-    align-items: center;
-    margin-bottom: 22px;
+  .header.hero {
+    height: 210px;
+    margin-bottom: 12px;
   }
 
-  .header-titles {
-    flex: 1;
-    min-width: 0;
+  .hero-name {
+    font-size: 26px;
   }
 
-  .greeting-name {
-    font-size: 34px;
-  }
-
-  .greeting-eyebrow {
+  .hero-date {
     font-size: 14px;
+  }
+
+  .hero-weather-temp {
+    font-size: 26px;
+  }
+
+  .hero-weather-icon {
+    font-size: 28px;
+  }
+
+  .day-banner {
+    margin-bottom: 14px;
+  }
+
+  .day-banner-cell {
+    min-width: 0;
+    padding: 4px 4px;
   }
 
   .icon-btn {
@@ -30,17 +42,22 @@
     height: 44px;
   }
 
+  .hero-icon-btn {
+    width: 32px;
+    height: 32px;
+  }
+
   .quick-summary-card {
-    padding: 16px;
+    padding: 10px 12px;
   }
 
   .quick-summary {
     grid-template-columns: repeat(3, 1fr);
-    row-gap: 14px;
+    row-gap: 10px;
   }
 
   .quick-tile {
-    padding: 4px 6px;
+    padding: 2px 4px;
     border-right: 1px solid var(--color-hairline);
   }
 
@@ -49,27 +66,12 @@
   }
 
   .quick-tile:nth-child(-n+3) {
-    padding-bottom: 14px;
+    padding-bottom: 10px;
     border-bottom: 1px solid var(--color-hairline);
   }
 
   .quick-tile-number {
-    font-size: 22px;
-  }
-
-  .header-avatar {
-    width: 38px;
-    height: 38px;
-    font-size: 14px;
-  }
-
-  .header .greeting-name {
-    font-size: 21px;
-    gap: 6px;
-  }
-
-  .greeting-glyph {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .card-grid,
