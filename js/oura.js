@@ -95,36 +95,14 @@ function readinessColor(score) {
  * for the inner arc (usually scaled against a meaningful target/range).
  * ---------------------------------------------------------------------- */
 
-function ringSVG({ pct, series, color, gradient }) {
+function ringSVG({ pct, color, gradient }) {
+  // Clean solid ring only — no radial tick marks. An earlier version drew
+  // 14 spiky lines around the rim to show the trend "in the ring," but it
+  // read as visually busy/cluttered in practice. The trend now lives in
+  // the delta text under the ring instead (see buildRingItem).
   const r = 30;
   const c = 2 * Math.PI * r;
   const dash = `${c * clamp(pct, 0, 1)} ${c}`;
-  const todayTickColor = color || (gradient ? gradient.to : "var(--accent-health)");
-
-  const min = Math.min(...series);
-  const max = Math.max(...series);
-  const span = max - min || 1;
-  const tickBase = 39;
-  const tickMaxExtra = 9;
-  const n = series.length;
-
-  // Note: angles are NOT pre-offset here — the whole <svg> gets rotated
-  // -90deg via CSS (same as the progress arc), so 0deg here lines up with
-  // 12 o'clock once rendered, and ticks + arc stay in sync.
-  const ticks = series
-    .map((v, i) => {
-      const norm = (v - min) / span;
-      const len = tickBase + norm * tickMaxExtra;
-      const angle = (i / n) * 360;
-      const rad = (angle * Math.PI) / 180;
-      const x1 = 50 + tickBase * Math.cos(rad);
-      const y1 = 50 + tickBase * Math.sin(rad);
-      const x2 = 50 + len * Math.cos(rad);
-      const y2 = 50 + len * Math.sin(rad);
-      const isToday = i === n - 1;
-      return `<line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}" class="ring-tick${isToday ? " ring-tick--today" : ""}" stroke="${isToday ? todayTickColor : "var(--color-hairline)"}" stroke-width="${isToday ? 2.4 : 1.6}" stroke-linecap="round" />`;
-    })
-    .join("");
 
   const gradientDef = gradient
     ? `<defs><linearGradient id="${gradient.id}" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${gradient.from}" /><stop offset="100%" stop-color="${gradient.to}" /></linearGradient></defs>`
@@ -134,7 +112,6 @@ function ringSVG({ pct, series, color, gradient }) {
   return `
     <svg viewBox="0 0 100 100">
       ${gradientDef}
-      <g>${ticks}</g>
       <circle class="ring-track" cx="50" cy="50" r="${r}"></circle>
       <circle class="ring-value" cx="50" cy="50" r="${r}" stroke="${strokeColor}" stroke-dasharray="${dash}"></circle>
     </svg>
