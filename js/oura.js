@@ -163,7 +163,7 @@ export function renderOuraRings(container, summary) {
     unit: "sleep",
     delta: sleepDelta,
     label: "Sleep",
-    numberSize: "17px",
+    numberSize: "15px",
   });
 
   // HRV
