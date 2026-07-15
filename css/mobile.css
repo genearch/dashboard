@@ -116,12 +116,8 @@
 
   .card--tappable,
   .sheet-close,
-  .segment-card {
+  .trip-row {
     min-height: 48px;
-  }
-
-  .segment-card {
-    flex: 0 0 78vw;
   }
 
   .footer {

@@ -217,12 +217,12 @@ async function loadAll(sheetApi, isManualRefresh) {
 
   const today = new Date();
 
-  const [calendarSummary, ouraSummary, weather, marketsSummary, trip, birthdaysSummary] = await Promise.all([
+  const [calendarSummary, ouraSummary, weather, marketsSummary, trips, birthdaysSummary] = await Promise.all([
     CalendarMod.getTodayCalendarSummary(today),
     OuraMod.getOuraSummary(),
     WeatherMod.getWeatherSummary(),
     MarketsMod.getMarketsSummary(),
-    TravelMod.getUpcomingTrip(today),
+    TravelMod.getUpcomingTrips(today),
     BirthdaysMod.getBirthdaysSummary(today),
   ]);
 
@@ -280,12 +280,20 @@ async function loadAll(sheetApi, isManualRefresh) {
   });
 
   // Trips card
-  TravelMod.renderTripSummary($("#tripSummary"), trip, today);
-  TravelMod.renderSegments($("#tripSegments"), trip, today);
-  TravelMod.renderSegmentDots($("#tripDots"), trip);
-  TravelMod.wireSegmentScroll($("#tripSegments"), $("#tripDots"));
+  TravelMod.renderTripsList($("#tripsList"), trips, today);
+  $$(".trip-row", $("#tripsList")).forEach((row) => {
+    row.addEventListener("click", () => {
+      const trip = trips.find((t) => t.id === row.dataset.tripId);
+      if (!trip) return;
+      sheetApi.open(trip.name, (body) => {
+        body.className = "sheet-body";
+        body.style.flexDirection = "column";
+        TravelMod.renderItinerary(body, trip);
+      });
+    });
+  });
 
-  renderQuickSummary({ calendarSummary, ouraSummary, weather, trip, marketsSummary, birthdaysSummary });
+  renderQuickSummary({ calendarSummary, ouraSummary, weather, trip: trips[0], marketsSummary, birthdaysSummary });
 
   // Card tap-through targets (header tap opens the relevant expansion sheet)
   $('[data-card="today"] .card-header')?.addEventListener("click", () => {
@@ -331,19 +339,6 @@ async function loadAll(sheetApi, isManualRefresh) {
       MarketsMod.renderPortfolio(body, marketsSummary);
     });
   });
-  const tripsHandler = (e) => {
-    if (!trip) return;
-    if (e.target.closest(".segment-card")) return;
-    e.stopPropagation();
-    sheetApi.open(`${trip.countryFlag} ${trip.destination} — Trip Details`, (body) => {
-      body.className = "sheet-body";
-      body.style.flexDirection = "column";
-      TravelMod.renderSegments(body, trip, today);
-    });
-  };
-  $('[data-card-link="trips"]')?.addEventListener("click", tripsHandler);
-  $('[data-card="trips"]')?.addEventListener("click", tripsHandler);
-
   refreshBtn?.classList.remove("is-spinning");
   $("#marketsRefreshBtn")?.classList.remove("is-spinning");
   $("#weatherRefreshBtn")?.classList.remove("is-spinning");

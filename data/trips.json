@@ -1,43 +1,170 @@
 {
-  "_comment": "Seeded from live tripsy_trips_list / tripsy_transportations_list / tripsy_hostings_list calls on 2026-07-14. See js/travel.js for the live-fetch integration point.",
+  "_comment": "Seeded from live tripsy_trips_list / tripsy_transportations_list / tripsy_hostings_list / tripsy_activities_list calls on 2026-07-14. Each trip uses its real Tripsy name. See js/travel.js for the live-fetch integration point.",
   "trips": [
     {
       "id": "1138003",
       "name": "RSPA",
-      "destination": "Las Vegas",
-      "countryFlag": "🇺🇸",
       "startsAt": "2026-07-26",
       "endsAt": "2026-07-28",
       "segments": [
         {
           "type": "flight",
-          "route": "LAX → LAS",
-          "date": "07/26",
+          "title": "LAX → LAS",
+          "start": "2026-07-26T15:10:00Z",
+          "end": "2026-07-26T16:33:00Z",
           "company": "American Airlines",
-          "flightNumber": "AA6425",
-          "seat": "3D",
+          "number": "AA6425",
           "seatClass": "First",
-          "departure": "2026-07-26T15:10:00Z",
-          "arrival": "2026-07-26T16:33:00Z"
+          "seat": "3D"
         },
         {
           "type": "hotel",
-          "name": "The LINQ Hotel",
-          "room": "District 3 | Deluxe Room | King",
-          "checkIn": "2026-07-26",
-          "checkOut": "2026-07-28",
-          "address": "3535 Las Vegas Boulevard South, Las Vegas, NV"
+          "title": "The LINQ Hotel",
+          "start": "2026-07-26T00:00:00Z",
+          "end": "2026-07-28T00:00:00Z",
+          "location": "3535 Las Vegas Boulevard South, Las Vegas, NV",
+          "notes": "District 3 | Deluxe Room | King"
         },
         {
           "type": "flight",
-          "route": "LAS → LAX",
-          "date": "07/28",
+          "title": "LAS → LAX",
+          "start": "2026-07-28T21:36:00Z",
+          "end": "2026-07-28T22:54:00Z",
           "company": "American Airlines",
-          "flightNumber": "AA2039",
-          "seat": null,
+          "number": "AA2039",
+          "seatClass": "First"
+        }
+      ]
+    },
+    {
+      "id": "1138165",
+      "name": "Sunshine Festival",
+      "startsAt": "2026-08-09",
+      "endsAt": "2026-09-03",
+      "segments": [
+        {
+          "type": "bus",
+          "title": "Camarillo → LAX",
+          "start": "2026-08-09T15:25:00Z",
+          "end": "2026-08-09T17:10:00Z",
+          "company": "Santa Barbara Airbus",
+          "number": "A947802.BE"
+        },
+        {
+          "type": "flight",
+          "title": "LAX → DFW",
+          "start": "2026-08-09T21:00:00Z",
+          "end": "2026-08-10T00:15:00Z",
+          "company": "American Airlines",
+          "number": "AA500",
+          "seatClass": "Business",
+          "seat": "2C"
+        },
+        {
+          "type": "flight",
+          "title": "DFW → LHR",
+          "start": "2026-08-10T03:59:00Z",
+          "end": "2026-08-10T13:25:00Z",
+          "company": "American Airlines",
+          "number": "AA78",
+          "seatClass": "Business",
+          "seat": "4J"
+        },
+        {
+          "type": "train",
+          "title": "London Kings Cross → York",
+          "start": "2026-08-10T17:00:00Z",
+          "end": "2026-08-10T19:03:00Z",
+          "company": "London North Eastern Railway",
+          "seat": "20"
+        },
+        {
+          "type": "activity",
+          "title": "Blackmore Campground",
+          "start": "2026-08-25T12:00:00Z",
+          "end": "2026-08-27T07:00:00Z",
+          "location": "Hanley Swan, WR8 0EE, UK"
+        },
+        {
+          "type": "train",
+          "title": "York → London Kings Cross",
+          "start": "2026-09-02T07:18:00Z",
+          "end": "2026-09-02T09:14:00Z",
+          "company": "Grand Central Railway",
+          "seat": "39"
+        },
+        {
+          "type": "flight",
+          "title": "LHR → LAX",
+          "start": "2026-09-02T14:05:00Z",
+          "end": "2026-09-03T01:20:00Z",
+          "company": "British Airways",
+          "number": "BA269",
+          "seatClass": "Business"
+        }
+      ]
+    },
+    {
+      "id": "1138104",
+      "name": "SpotOn",
+      "startsAt": "2026-09-08",
+      "endsAt": "2026-09-18",
+      "segments": [
+        {
+          "type": "flight",
+          "title": "LAX → AUS",
+          "start": "2026-09-08T16:05:00Z",
+          "end": "2026-09-08T19:19:00Z",
+          "company": "American Airlines",
+          "number": "AA6409",
+          "seat": "9C"
+        },
+        {
+          "type": "hotel",
+          "title": "Hotel Van Zandt",
+          "start": "2026-09-08T21:00:00Z",
+          "end": "2026-09-11T02:00:00Z",
+          "location": "605 Davis Street, Austin, TX",
+          "notes": "King room"
+        },
+        {
+          "type": "roadtrip",
+          "title": "Hotel Van Zandt → AUS Airport",
+          "start": "2026-09-11T01:00:00Z",
+          "end": "2026-09-11T01:30:00Z",
+          "company": "Uber"
+        },
+        {
+          "type": "flight",
+          "title": "AUS → LHR",
+          "start": "2026-09-11T03:30:00Z",
+          "end": "2026-09-11T12:55:00Z",
+          "company": "American Airlines",
+          "number": "AA7007"
+        },
+        {
+          "type": "train",
+          "title": "London Kings Cross → York",
+          "start": "2026-09-11T16:30:00Z",
+          "end": "2026-09-11T20:39:00Z",
           "seatClass": "First",
-          "departure": "2026-07-28T21:36:00Z",
-          "arrival": "2026-07-28T22:54:00Z"
+          "seat": "45"
+        },
+        {
+          "type": "train",
+          "title": "York → London Kings Cross",
+          "start": "2026-09-17T09:31:00Z",
+          "end": "2026-09-17T11:31:00Z",
+          "seat": "14"
+        },
+        {
+          "type": "flight",
+          "title": "LHR → LAX",
+          "start": "2026-09-17T15:55:00Z",
+          "end": "2026-09-18T03:15:00Z",
+          "company": "American Airlines",
+          "number": "AA137",
+          "seat": "20H"
         }
       ]
     }

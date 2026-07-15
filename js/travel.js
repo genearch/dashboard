@@ -2,10 +2,20 @@
    travel.js — Trips data provider + rendering
    ==========================================================================
    INTEGRATION POINT: replace `fetchTrips()` with a live call to your trip
-   planner (e.g. Tripsy). Keep the returned shape: { id, name, destination,
-   countryFlag, startsAt, endsAt, segments[] } where each segment is either
-   a flight (type:"flight") or a stay (type:"hotel").
+   planner (e.g. Tripsy). Keep the returned shape: { id, name, startsAt,
+   endsAt, segments[] } where each segment is one leg of the itinerary:
+   { type: "flight"|"train"|"bus"|"roadtrip"|"hotel"|"activity", title,
+   start, end, company, number, seatClass, seat, location, notes }.
    ========================================================================== */
+
+const TYPE_ICON = {
+  flight: "✈️",
+  train: "🚆",
+  bus: "🚌",
+  roadtrip: "🚗",
+  hotel: "🏨",
+  activity: "🏕️",
+};
 
 async function fetchTrips() {
   const res = await fetch("data/trips.json");
@@ -24,89 +34,77 @@ function fmtShortDate(dateStr) {
   return d.toLocaleDateString([], { month: "2-digit", day: "2-digit" });
 }
 
-export async function getUpcomingTrip(today = new Date()) {
-  const trips = await fetchTrips();
-  const upcoming = trips
-    .filter((t) => daysUntil(t.endsAt, today) >= 0)
-    .sort((a, b) => new Date(a.startsAt) - new Date(b.startsAt));
-  return upcoming[0] || null;
-}
-
-export function renderTripSummary(el, trip, today = new Date()) {
-  if (!trip) {
-    el.innerHTML = `<div class="empty-state">No upcoming trips</div>`;
-    return;
-  }
-  const departsIn = daysUntil(trip.startsAt, today);
-  const departsLabel =
-    departsIn < 0 ? "In progress" : departsIn === 0 ? "Departs today" : `Departs in ${departsIn} day${departsIn === 1 ? "" : "s"}`;
-
-  el.innerHTML = `
-    <div class="trip-destinations">${trip.countryFlag} ${trip.destination}</div>
-    <div class="trip-meta">
-      <span>${fmtShortDate(trip.startsAt)}–${fmtShortDate(trip.endsAt)}</span>
-      <span class="trip-departs-pill">${departsLabel}</span>
-    </div>
-  `;
-}
-
 function fmtDateTime(iso) {
   const d = new Date(iso);
   return d.toLocaleString([], { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
 }
 
-function segmentPill(dateIso, today) {
-  const diff = daysUntil(dateIso.slice(0, 10), today);
-  if (diff < 0) return "Past";
-  if (diff === 0) return "Today";
-  if (diff === 1) return "Tomorrow";
-  return `In ${diff} days`;
+export async function getUpcomingTrips(today = new Date()) {
+  const trips = await fetchTrips();
+  return trips
+    .filter((t) => daysUntil(t.endsAt, today) >= 0)
+    .sort((a, b) => new Date(a.startsAt) - new Date(b.startsAt));
 }
 
-export function renderSegments(container, trip, today = new Date()) {
+function departsLabel(trip, today) {
+  const departsIn = daysUntil(trip.startsAt, today);
+  if (departsIn < 0) return "In progress";
+  if (departsIn === 0) return "Departs today";
+  if (departsIn === 1) return "Departs tomorrow";
+  return `Departs in ${departsIn} days`;
+}
+
+export function renderTripsList(container, trips, today = new Date()) {
+  container.innerHTML = "";
+  if (!trips.length) {
+    container.innerHTML = `<div class="empty-state">No upcoming trips</div>`;
+    return;
+  }
+  trips.forEach((trip) => {
+    const row = document.createElement("button");
+    row.className = "trip-row";
+    row.dataset.tripId = trip.id;
+    row.innerHTML = `
+      <span class="trip-row-icon">✈️</span>
+      <div class="trip-row-main">
+        <div class="trip-row-name">${trip.name}</div>
+        <div class="trip-row-dates">${fmtShortDate(trip.startsAt)} – ${fmtShortDate(trip.endsAt)}</div>
+      </div>
+      <span class="trip-departs-pill">${departsLabel(trip, today)}</span>
+    `;
+    container.appendChild(row);
+  });
+}
+
+export function renderItinerary(container, trip) {
   container.innerHTML = "";
   if (!trip) return;
-  trip.segments.forEach((seg) => {
-    const card = document.createElement("div");
-    card.className = "segment-card";
-    if (seg.type === "flight") {
-      card.innerHTML = `
-        <span class="segment-pill">${segmentPill(seg.departure, today)}</span>
-        <div class="segment-route">✈️ ${seg.route}</div>
-        <div class="segment-time">${fmtDateTime(seg.departure)}</div>
-        <div class="segment-detail">${seg.company}${seg.flightNumber ? " · " + seg.flightNumber : ""}</div>
-        ${seg.seat ? `<div class="segment-detail">${seg.seatClass || ""} · Seat ${seg.seat}</div>` : ""}
-      `;
-    } else {
-      card.innerHTML = `
-        <span class="segment-pill">${segmentPill(seg.checkIn + "T00:00:00Z", today)}</span>
-        <div class="segment-route">🏨 ${seg.name}</div>
-        <div class="segment-time">${fmtShortDate(seg.checkIn)} – ${fmtShortDate(seg.checkOut)}</div>
-        <div class="segment-detail">${seg.room || ""}</div>
-      `;
+  const sorted = [...trip.segments].sort((a, b) => new Date(a.start) - new Date(b.start));
+  sorted.forEach((seg) => {
+    const row = document.createElement("div");
+    row.className = "itinerary-row";
+    const detailParts = [];
+    if (seg.company) detailParts.push(seg.company);
+    if (seg.number) detailParts.push(seg.number);
+    if (seg.seatClass || seg.seat) {
+      detailParts.push(`${seg.seatClass || ""}${seg.seatClass && seg.seat ? " · " : ""}${seg.seat ? "Seat " + seg.seat : ""}`.trim());
     }
-    container.appendChild(card);
-  });
-}
 
-export function renderSegmentDots(container, trip) {
-  container.innerHTML = "";
-  if (!trip) return;
-  trip.segments.forEach((_, i) => {
-    const dot = document.createElement("span");
-    dot.className = "dot-item" + (i === 0 ? " is-active" : "");
-    container.appendChild(dot);
-  });
-}
+    const isStay = seg.type === "hotel" || seg.type === "activity";
+    const dateLine = isStay
+      ? `${fmtDateTime(seg.start)} – ${fmtDateTime(seg.end)}`
+      : `${fmtDateTime(seg.start)} → ${fmtDateTime(seg.end)}`;
 
-export function wireSegmentScroll(scrollEl, dotsContainer) {
-  if (!scrollEl || !dotsContainer) return;
-  const dots = Array.from(dotsContainer.children);
-  if (dots.length <= 1) return;
-  scrollEl.addEventListener("scroll", () => {
-    const cardWidth = scrollEl.firstElementChild?.getBoundingClientRect().width || 1;
-    const gap = 14;
-    const index = Math.round(scrollEl.scrollLeft / (cardWidth + gap));
-    dots.forEach((d, i) => d.classList.toggle("is-active", i === index));
+    row.innerHTML = `
+      <div class="itinerary-icon">${TYPE_ICON[seg.type] || "📍"}</div>
+      <div class="itinerary-body">
+        <div class="itinerary-title">${seg.title}</div>
+        <div class="itinerary-date">${dateLine}</div>
+        ${detailParts.length ? `<div class="itinerary-detail">${detailParts.join(" · ")}</div>` : ""}
+        ${seg.location ? `<div class="itinerary-detail">${seg.location}</div>` : ""}
+        ${seg.notes ? `<div class="itinerary-detail">${seg.notes}</div>` : ""}
+      </div>
+    `;
+    container.appendChild(row);
   });
 }
