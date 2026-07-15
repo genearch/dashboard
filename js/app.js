@@ -59,31 +59,6 @@ function initTheme() {
 }
 
 /* ---------------------------------------------------------------------- *
- * Sidebar (mobile)
- * ---------------------------------------------------------------------- */
-
-function initSidebar() {
-  const sidebar = $("#sidebar");
-  const scrim = $("#sidebarScrim");
-  const openBtn = $("#hamburgerBtn");
-  const closeBtn = $("#sidebarCloseBtn");
-
-  const open = () => {
-    sidebar.classList.add("is-open");
-    scrim.classList.add("is-open");
-  };
-  const close = () => {
-    sidebar.classList.remove("is-open");
-    scrim.classList.remove("is-open");
-  };
-
-  openBtn?.addEventListener("click", open);
-  closeBtn?.addEventListener("click", close);
-  scrim?.addEventListener("click", close);
-  $$(".nav-link").forEach((link) => link.addEventListener("click", close));
-}
-
-/* ---------------------------------------------------------------------- *
  * Greeting + clock
  * ---------------------------------------------------------------------- */
 
@@ -222,7 +197,6 @@ function renderQuickSummary({ calendarSummary, ouraSummary, weather, trip, marke
 
 async function boot() {
   initTheme();
-  initSidebar();
   renderGreeting();
   renderFooterClock();
   setInterval(renderFooterClock, 30000);
@@ -239,6 +213,7 @@ async function loadAll(sheetApi, isManualRefresh) {
   refreshBtn?.classList.add("is-spinning");
   $("#marketsRefreshBtn")?.classList.add("is-spinning");
   $("#weatherRefreshBtn")?.classList.add("is-spinning");
+  $("#ouraRefreshBtn")?.classList.add("is-spinning");
 
   const today = new Date();
 
@@ -259,6 +234,14 @@ async function loadAll(sheetApi, isManualRefresh) {
   // Oura card
   OuraMod.renderReadinessRing($("#readinessRing"), $("#readinessNumber"), $("#readinessCaption"), ouraSummary);
   OuraMod.renderMetricGrid($("#ouraMetricGrid"), ouraSummary);
+  const ouraUpdatedEl = $("#ouraUpdatedAt");
+  if (ouraUpdatedEl) {
+    ouraUpdatedEl.textContent = `Updated ${today.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
+  }
+  $("#ouraRefreshBtn")?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    loadAll(sheetApi, true);
+  });
 
   // Weather card
   WeatherMod.renderWeatherColumns($("#weatherColumns"), weather);
@@ -268,6 +251,10 @@ async function loadAll(sheetApi, isManualRefresh) {
       sheetApi.open(`${loc.flag} ${loc.name} — 7 Day Forecast`, (body) => WeatherMod.renderForecast(body, loc));
     });
   });
+  const weatherUpdatedEl = $("#weatherUpdatedAt");
+  if (weatherUpdatedEl) {
+    weatherUpdatedEl.textContent = `Updated ${today.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
+  }
   $("#weatherRefreshBtn")?.addEventListener("click", (e) => {
     e.stopPropagation();
     loadAll(sheetApi, true);
@@ -360,6 +347,7 @@ async function loadAll(sheetApi, isManualRefresh) {
   refreshBtn?.classList.remove("is-spinning");
   $("#marketsRefreshBtn")?.classList.remove("is-spinning");
   $("#weatherRefreshBtn")?.classList.remove("is-spinning");
+  $("#ouraRefreshBtn")?.classList.remove("is-spinning");
   renderFooterClock();
 }
 

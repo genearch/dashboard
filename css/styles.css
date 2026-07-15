@@ -52,8 +52,7 @@ a {
 /* ---- App shell ---- */
 
 .app-shell {
-  display: grid;
-  grid-template-columns: 260px 1fr;
+  display: block;
   min-height: 100dvh;
 }
 
@@ -65,104 +64,6 @@ a {
   margin: 0 auto;
 }
 
-/* ---- Sidebar ---- */
-
-.sidebar {
-  background: var(--color-card);
-  border-right: 1px solid var(--color-hairline);
-  padding: 28px 20px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  position: sticky;
-  top: 0;
-  height: 100dvh;
-}
-
-.sidebar-profile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 4px 8px;
-}
-
-.sidebar-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-pill);
-  background: linear-gradient(135deg, var(--accent-calendar), var(--accent-travel));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 15px;
-  color: #fff;
-  flex-shrink: 0;
-}
-
-.sidebar-profile-name {
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.sidebar-profile-sub {
-  font-size: 12px;
-  color: var(--color-text-tertiary);
-}
-
-.sidebar-close {
-  display: none;
-}
-
-.sidebar-section {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.sidebar-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-text-tertiary);
-  padding: 8px 10px 6px;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 10px;
-  border-radius: var(--radius-control);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-text-secondary);
-  background: transparent;
-  border: none;
-  width: 100%;
-  text-align: left;
-  transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
-}
-
-.nav-link .nav-icon {
-  width: 18px;
-  text-align: center;
-  font-size: 15px;
-  opacity: 0.9;
-}
-
-.nav-link:hover {
-  background: var(--color-surface-2);
-  color: var(--color-text-primary);
-}
-
-.nav-link.is-active {
-  background: var(--color-surface-2);
-  color: var(--color-text-primary);
-}
-
 /* ---- Header ---- */
 
 .header {
@@ -172,10 +73,6 @@ a {
   gap: 24px;
   margin-bottom: 32px;
   padding-top: 4px;
-}
-
-.hamburger {
-  display: none;
 }
 
 .greeting-eyebrow {
