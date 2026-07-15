@@ -2,7 +2,7 @@
    service-worker.js — offline caching for Dashboard v2
    ========================================================================== */
 
-const CACHE_NAME = "dashboard-v2-cache-v3";
+const CACHE_NAME = "dashboard-v2-cache-v4";
 
 const APP_SHELL = [
   "./",
@@ -53,8 +53,18 @@ self.addEventListener("fetch", (event) => {
   const isAppCode = url.origin === self.location.origin && /\.(html|css|js)$/.test(url.pathname) || event.request.mode === "navigate";
 
   if (url.origin !== self.location.origin || isAppCode) {
+    // cache: "no-store" bypasses the browser's HTTP cache (and any CDN
+    // max-age) so "network-first" actually means fresh, not "whatever the
+    // disk cache still has from 10 minutes ago."
+    const freshRequest = new Request(event.request.url, {
+      method: event.request.method,
+      headers: event.request.headers,
+      mode: url.origin === self.location.origin ? "same-origin" : event.request.mode,
+      credentials: event.request.credentials,
+      cache: "no-store",
+    });
     event.respondWith(
-      fetch(event.request)
+      fetch(freshRequest)
         .then((response) => {
           if (response && response.status === 200 && url.origin === self.location.origin) {
             const clone = response.clone();
