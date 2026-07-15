@@ -1,11 +1,14 @@
 /* ==========================================================================
    calendar.js — Calendar + Reminders data provider and rendering
    ==========================================================================
-   INTEGRATION POINT: swap `fetchEvents()` / `fetchReminders()` to call your
-   live Outlook/Apple Calendar bridge (e.g. the Pear MCP bridge over a small
-   backend endpoint) instead of the local JSON snapshots. Keep the returned
-   shape the same: events -> { id, title, start, end, calendar, location,
-   attendees, isOnline }, reminders -> { id, title, list, priority, completed }.
+   Data source: Fantastical, scoped to the "Me" calendar set (iCloud Personal
+   + CRSI Calendar) for events, and Apple Reminders items due today for
+   reminders. INTEGRATION POINT: swap `fetchEvents()` / `fetchReminders()` to
+   call a live Fantastical bridge over a small backend endpoint instead of
+   the local JSON snapshots (a static GitHub Pages site can't call the
+   Fantastical MCP directly). Keep the returned shape the same: events ->
+   { id, title, start, end, calendar, location, attendees, isOnline },
+   reminders -> { id, title, list, priority, completed, dueTime }.
    ========================================================================== */
 
 async function fetchEvents() {

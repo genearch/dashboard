@@ -1,9 +1,6 @@
 {
-  "_comment": "Seeded from a live pear_list_reminders call on 2026-07-14. See js/calendar.js (reminders share the calendar/task provider) for the live-fetch integration point.",
+  "_comment": "Seeded from a live Fantastical queryCalendarItems call on 2026-07-14, filtered to Apple Reminders items due today. See js/calendar.js for the live-fetch integration point.",
   "reminders": [
-    { "id": "r1", "title": "Your Office365® Plan Has Been Successfully Renewed", "list": "Flagged Emails", "priority": "high", "completed": false },
-    { "id": "r2", "title": "{HRx} Heartland Restaurant Upcoming Training", "list": "Flagged Emails", "priority": "none", "completed": false },
-    { "id": "r3", "title": "Your Hilton LAX Airport Parking order has been refunded", "list": "Flagged Emails", "priority": "none", "completed": false },
-    { "id": "r4", "title": "SkyForce Forum: SkyTab Enhancement Suggestions", "list": "Flagged Emails", "priority": "none", "completed": false }
+    { "id": "r1", "title": "Meal Choices", "list": "Inbox", "priority": "none", "completed": false, "dueTime": "2026-07-14T16:00:00.000Z" }
   ]
 }

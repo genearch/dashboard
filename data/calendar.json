@@ -1,6 +1,16 @@
 {
-  "_comment": "Seeded from a live pear_list_events call against the connected Outlook account on 2026-07-14. See js/calendar.js for the live-fetch integration point.",
+  "_comment": "Seeded from a live Fantastical queryCalendarItems call on 2026-07-14, scoped to your \"Me\" calendar set (iCloud Personal + CRSI Calendar). See js/calendar.js for the live-fetch integration point.",
   "events": [
+    {
+      "id": "lunch-at-glorias",
+      "title": "Lunch at Glorias",
+      "start": "2026-07-14T20:30:00.000Z",
+      "end": "2026-07-14T21:30:00.000Z",
+      "calendar": "Personal",
+      "location": "Gloria's Kitchen, 2881 Loma Vista Rd, Ventura, CA 93003",
+      "attendees": [],
+      "isOnline": false
+    },
     {
       "id": "dealers-quick-sync",
       "title": "Dealers - Quick Sync",
@@ -8,7 +18,7 @@
       "end": "2026-07-14T17:45:00.000Z",
       "calendar": "Calendar",
       "location": "",
-      "attendees": ["Josh Carper"],
+      "attendees": [],
       "isOnline": true
     }
   ]
