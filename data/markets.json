@@ -1,18 +1,18 @@
 {
-  "_comment": "Mock data — no market-data connector is currently attached. See js/markets.js for the live-fetch integration point (e.g. IEX Cloud, Finnhub, Alpha Vantage).",
+  "_comment": "Updated with real quotes pulled via web search on 2026-07-14 (Yahoo Finance / CNBC / FX Leaders). Portfolio basis ($148.20/share, 500 shares) is still a placeholder — swap in your real cost basis, or wire js/markets.js to a live brokerage/quote API. See js/markets.js for the integration point.",
   "indices": [
-    { "symbol": "DOW", "name": "Dow Jones", "price": 41823.15, "changePct": 0.42 },
-    { "symbol": "NASDAQ", "name": "Nasdaq", "price": 18234.88, "changePct": -0.18 },
-    { "symbol": "SPX", "name": "S&P 500", "price": 5678.33, "changePct": 0.11 },
-    { "symbol": "WTI", "name": "WTI Crude", "price": 78.42, "changePct": -0.63 }
+    { "symbol": "DOW", "name": "Dow Jones", "price": 52508.27, "changePct": 0.02 },
+    { "symbol": "NASDAQ", "name": "Nasdaq", "price": 26107.01, "changePct": 0.9 },
+    { "symbol": "SPX", "name": "S&P 500", "price": 7543.59, "changePct": 0.38 },
+    { "symbol": "WTI", "name": "WTI Crude", "price": 79.86, "changePct": 2.2 }
   ],
   "watchlist": [
-    { "symbol": "AAPL", "name": "Apple", "price": 231.14, "changePct": 1.2 }
+    { "symbol": "AAPL", "name": "Apple", "price": 314.86, "changePct": -0.77 }
   ],
   "portfolio": {
     "symbol": "AAPL",
     "shares": 500,
     "basisPerShare": 148.20,
-    "currentPrice": 231.14
+    "currentPrice": 314.86
   }
 }
